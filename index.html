@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu & Billing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Restaurant Menu</h1>
+        <div style="display:flex;gap:1em;align-items:center;">
+            <button id="reportBtn">Report</button>
+            <button id="adminBtn">Menu Management</button>
+        </div>
+    </header>
+    <main>
+        <section id="menuSection">
+            <h2>Menu</h2>
+            <div id="menuItems" class="menu-grid"></div>
+        </section>
+        <section id="cartSection">
+            <h2>Cart</h2>
+            <div id="cartItems"></div>
+            <div id="cartTotal"></div>
+            <button id="payNowBtn">Pay Now</button>
+            <div id="qrCodeContainer"></div>
+        </section>
+    </main>
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAdmin">&times;</span>
+            <h2>Menu Management</h2>
+            <form id="menuForm">
+                <input type="hidden" id="editIndex">
+                <input type="text" id="itemName" placeholder="Item Name" required>
+                <input type="number" id="itemPrice" placeholder="Price" required min="0">
+                <input type="text" id="itemImage" placeholder="Image URL" required>
+                <button type="submit" id="saveBtn">Add Item</button>
+            </form>
+            <div id="adminMenuList"></div>
+        </div>
+    </div>
+    <!-- Report Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeReport">&times;</span>
+            <h2>Sales Report</h2>
+            <div style="margin-bottom:1em;">
+                <button class="report-range" data-range="today">Today</button>
+                <button class="report-range" data-range="week">This Week</button>
+                <button class="report-range" data-range="month">This Month</button>
+                <button class="report-range" data-range="year">This Year</button>
+            </div>
+            <div style="margin-bottom:1em;display:flex;gap:1em;">
+                <button id="downloadPdfBtn" style="background:#6366f1;color:#fff;border:none;border-radius:6px;padding:0.5em 1.2em;cursor:pointer;font-weight:600;">Download PDF</button>
+                <button id="resetSalesBtn" style="background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:0.5em 1.2em;cursor:pointer;font-weight:600;">Reset Sales</button>
+            </div>
+            <div id="reportContent"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
