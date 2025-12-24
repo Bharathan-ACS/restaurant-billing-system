@@ -35,7 +35,7 @@
                 <input type="hidden" id="editIndex">
                 <input type="text" id="itemName" placeholder="Item Name" required>
                 <input type="number" id="itemPrice" placeholder="Price" required min="0">
-                <input type="text" id="itemImage" placeholder="Image URL" required>
+                <input type="file" id="itemImage" accept="image/*" required>
                 <button type="submit" id="saveBtn">Add Item</button>
             </form>
             <div id="adminMenuList"></div>
@@ -64,3 +64,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
