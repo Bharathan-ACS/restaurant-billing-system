@@ -299,17 +299,31 @@ document.getElementById('menuForm').onsubmit = function(e) {
     const idx = document.getElementById('editIndex').value;
     const name = document.getElementById('itemName').value;
     const price = parseFloat(document.getElementById('itemPrice').value);
-    const image = document.getElementById('itemImage').value;
+    const imageInput = document.getElementById('itemImage');
+    const file = imageInput.files[0];
     let menu = getMenu();
-    if (idx === '') {
-        menu.push({ name, price, image });
-    } else {
-        menu[idx] = { name, price, image };
+    function saveMenuItem(imageData) {
+        if (idx === '') {
+            menu.push({ name, price, image: imageData });
+        } else {
+            menu[idx] = { name, price, image: imageData };
+        }
+        setMenu(menu);
+        renderMenu();
+        renderAdminMenu();
+        clearAdminForm();
     }
-    setMenu(menu);
-    renderMenu();
-    renderAdminMenu();
-    clearAdminForm();
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            saveMenuItem(ev.target.result);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        // If editing and no new file selected, keep previous image
+        let imageData = (idx !== '' && menu[idx]) ? menu[idx].image : '';
+        saveMenuItem(imageData);
+    }
 };
 
 function editMenuItem(idx) {
@@ -355,3 +369,4 @@ window.removeFromCart = removeFromCart;
 window.editMenuItem = editMenuItem;
 window.deleteMenuItem = deleteMenuItem;
 window.updateCartQty = updateCartQty;
+
